@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB Technology Basics</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;background:#111}
+body{font-family:Arial,sans-serif;overflow-x:hidden}
+
+.hero{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  max-height:100vh;
+  overflow:hidden;
+  background:#111;
+}
+
+.hero input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.slides{position:absolute;inset:0}
+
+.slide{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  background:#111;
+  transition:transform 1.2s cubic-bezier(.22,.61,.36,1);
+}
+
+#slide1:checked~.slides .slide:nth-child(1),
+#slide2:checked~.slides .slide:nth-child(2),
+#slide3:checked~.slides .slide:nth-child(3),
+#slide4:checked~.slides .slide:nth-child(4),
+#slide5:checked~.slides .slide:nth-child(5),
+#slide6:checked~.slides .slide:nth-child(6),
+#slide7:checked~.slides .slide:nth-child(7),
+#slide8:checked~.slides .slide:nth-child(8),
+#slide9:checked~.slides .slide:nth-child(9),
+#slide10:checked~.slides .slide:nth-child(10),
+#slide11:checked~.slides .slide:nth-child(11),
+#slide12:checked~.slides .slide:nth-child(12),
+#slide13:checked~.slides .slide:nth-child(13),
+#slide14:checked~.slides .slide:nth-child(14),
+#slide15:checked~.slides .slide:nth-child(15){
+  opacity:1;
+  visibility:visible;
+}
+
+#slide1:checked~.slides .slide:nth-child(1) img,
+#slide2:checked~.slides .slide:nth-child(2) img,
+#slide3:checked~.slides .slide:nth-child(3) img,
+#slide4:checked~.slides .slide:nth-child(4) img,
+#slide5:checked~.slides .slide:nth-child(5) img,
+#slide6:checked~.slides .slide:nth-child(6) img,
+#slide7:checked~.slides .slide:nth-child(7) img,
+#slide8:checked~.slides .slide:nth-child(8) img,
+#slide9:checked~.slides .slide:nth-child(9) img,
+#slide10:checked~.slides .slide:nth-child(10) img,
+#slide11:checked~.slides .slide:nth-child(11) img,
+#slide12:checked~.slides .slide:nth-child(12) img,
+#slide13:checked~.slides .slide:nth-child(13) img,
+#slide14:checked~.slides .slide:nth-child(14) img,
+#slide15:checked~.slides .slide:nth-child(15) img{
+  transform:scale(1.015);
+}
+
+.controls{
+  position:absolute;
+  z-index:10;
+  top:50%;
+  left:0;
+  right:0;
+  transform:translateY(-50%);
+  display:flex;
+  justify-content:space-between;
+  padding:0 28px;
+  pointer-events:none;
+}
+
+.arrow{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  pointer-events:auto;
+  color:#fff;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:transform .3s ease,background .3s ease,color .3s ease;
+}
+
+.arrow:hover{
+  transform:scale(1.12);
+  background:#fff;
+  color:#111;
+}
+
+.arrow svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+}
+
+#slide1:checked~.controls .prev1,
+#slide2:checked~.controls .prev2,
+#slide3:checked~.controls .prev3,
+#slide4:checked~.controls .prev4,
+#slide5:checked~.controls .prev5,
+#slide6:checked~.controls .prev6,
+#slide7:checked~.controls .prev7,
+#slide8:checked~.controls .prev8,
+#slide9:checked~.controls .prev9,
+#slide10:checked~.controls .prev10,
+#slide11:checked~.controls .prev11,
+#slide12:checked~.controls .prev12,
+#slide13:checked~.controls .prev13,
+#slide14:checked~.controls .prev14,
+#slide15:checked~.controls .prev15,
+#slide1:checked~.controls .next1,
+#slide2:checked~.controls .next2,
+#slide3:checked~.controls .next3,
+#slide4:checked~.controls .next4,
+#slide5:checked~.controls .next5,
+#slide6:checked~.controls .next6,
+#slide7:checked~.controls .next7,
+#slide8:checked~.controls .next8,
+#slide9:checked~.controls .next9,
+#slide10:checked~.controls .next10,
+#slide11:checked~.controls .next11,
+#slide12:checked~.controls .next12,
+#slide13:checked~.controls .next13,
+#slide14:checked~.controls .next14,
+#slide15:checked~.controls .next15{
+  display:flex;
+}
+
+
+.thumbnails label{
+  width:55px;
+  height:34px;
+  overflow:hidden;
+  cursor:pointer;
+  opacity:.5;
+  border:1px solid transparent;
+  transition:opacity .3s ease,transform .3s ease,border-color .3s ease;
+}
+
+.thumbnails label:hover{
+  opacity:1;
+  transform:translateY(-3px);
+}
+
+.thumbnails img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+
+@media(max-width:700px){
+  .hero{aspect-ratio:16/9}
+  .controls{padding:0 12px}
+  .arrow{width:44px;height:44px}
+  .arrow svg{width:17px;height:17px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+<input type="radio" name="hero-slider" id="slide1" checked>
+<input type="radio" name="hero-slider" id="slide2">
+<input type="radio" name="hero-slider" id="slide3">
+<input type="radio" name="hero-slider" id="slide4">
+<input type="radio" name="hero-slider" id="slide5">
+<input type="radio" name="hero-slider" id="slide6">
+<input type="radio" name="hero-slider" id="slide7">
+<input type="radio" name="hero-slider" id="slide8">
+<input type="radio" name="hero-slider" id="slide9">
+<input type="radio" name="hero-slider" id="slide10">
+<input type="radio" name="hero-slider" id="slide11">
+<input type="radio" name="hero-slider" id="slide12">
+<input type="radio" name="hero-slider" id="slide13">
+<input type="radio" name="hero-slider" id="slide14">
+<input type="radio" name="hero-slider" id="slide15">
+
+<div class="slides">
+
+<div class="slide">
+<img src="1.png" alt="Slide 1">
+</div>
+
+<div class="slide">
+<img src="1-1.png" alt="Slide 2">
+</div>
+
+<div class="slide">
+<img src="1-2.png" alt="Slide 3">
+</div>
+
+<div class="slide">
+<img src="2-1.png" alt="Slide 4">
+</div>
+<div class="slide">
+<img src="2-2.png" alt="Slide 5">
+</div>
+<div class="slide">
+<img src="3-1.png" alt="Slide 6">
+</div>
+<div class="slide">
+<img src="3-2.png" alt="Slide 7">
+</div>
+<div class="slide">
+<img src="4.png" alt="Slide 8">
+</div>
+<div class="slide">
+<img src="5.png" alt="Slide 9">
+</div>
+<div class="slide">
+<img src="5-1.png" alt="Slide 10">
+</div>
+<div class="slide">
+<img src="6.png" alt="Slide 11">
+</div>
+<div class="slide">
+<img src="6-2.png" alt="Slide 12">
+</div>
+<div class="slide">
+<img src="7.png" alt="Slide 13">
+</div>
+<div class="slide">
+<img src="7-1.png" alt="Slide 14">
+</div>
+<div class="slide">
+<img src="8.png" alt="Slide 15">
+</div>
+
+
+</div>
+
+<div class="controls">
+<label class="arrow prev1" for="slide15" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next1" for="slide2" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev2" for="slide1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next2" for="slide3" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev3" for="slide2" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next3" for="slide4" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev4" for="slide3" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next4" for="slide5" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev5" for="slide4" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next5" for="slide6" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev6" for="slide5" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next6" for="slide7" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev7" for="slide6" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next7" for="slide8" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev8" for="slide7" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next8" for="slide9" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev9" for="slide8" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next9" for="slide10" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev10" for="slide9" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next10" for="slide11" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev11" for="slide10" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next11" for="slide12" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev12" for="slide11" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next12" for="slide13" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev13" for="slide12" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next13" for="slide14" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev14" for="slide13" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next14" for="slide15" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+<label class="arrow prev15" for="slide14" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
+<label class="arrow next15" for="slide1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+</div>
+</section>
+</body>
+</html>
