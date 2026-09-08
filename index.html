@@ -184,12 +184,52 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
   object-fit:cover;
 }
 
+.counter{
+  position:absolute;
+  z-index:10;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:13px;
+  letter-spacing:.5px;
+  font-variant-numeric:tabular-nums;
+  background:rgba(0,0,0,.35);
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  pointer-events:none;
+}
+
+.counter span{display:none}
+
+#slide1:checked~.counter .c1,
+#slide2:checked~.counter .c2,
+#slide3:checked~.counter .c3,
+#slide4:checked~.counter .c4,
+#slide5:checked~.counter .c5,
+#slide6:checked~.counter .c6,
+#slide7:checked~.counter .c7,
+#slide8:checked~.counter .c8,
+#slide9:checked~.counter .c9,
+#slide10:checked~.counter .c10,
+#slide11:checked~.counter .c11,
+#slide12:checked~.counter .c12,
+#slide13:checked~.counter .c13,
+#slide14:checked~.counter .c14,
+#slide15:checked~.counter .c15{
+  display:inline;
+}
+
 
 @media(max-width:700px){
   .hero{aspect-ratio:16/9}
   .controls{padding:0 12px}
   .arrow{width:44px;height:44px}
   .arrow svg{width:17px;height:17px}
+  .counter{font-size:11px;padding:4px 10px;bottom:10px}
 }
 </style>
 </head>
@@ -298,6 +338,24 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 <label class="arrow next14" for="slide15" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
 <label class="arrow prev15" for="slide14" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5L8 12L15 19"/></svg></label>
 <label class="arrow next15" for="slide1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5L16 12L9 19"/></svg></label>
+</div>
+
+<div class="counter">
+<span class="c1">1 / 15</span>
+<span class="c2">2 / 15</span>
+<span class="c3">3 / 15</span>
+<span class="c4">4 / 15</span>
+<span class="c5">5 / 15</span>
+<span class="c6">6 / 15</span>
+<span class="c7">7 / 15</span>
+<span class="c8">8 / 15</span>
+<span class="c9">9 / 15</span>
+<span class="c10">10 / 15</span>
+<span class="c11">11 / 15</span>
+<span class="c12">12 / 15</span>
+<span class="c13">13 / 15</span>
+<span class="c14">14 / 15</span>
+<span class="c15">15 / 15</span>
 </div>
 </section>
 </body>
