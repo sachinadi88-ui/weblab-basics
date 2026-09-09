@@ -61,7 +61,8 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 #slide12:checked~.slides .slide:nth-child(12),
 #slide13:checked~.slides .slide:nth-child(13),
 #slide14:checked~.slides .slide:nth-child(14),
-#slide15:checked~.slides .slide:nth-child(15){
+#slide15:checked~.slides .slide:nth-child(15),
+#slide16:checked~.slides .slide:nth-child(16){
   opacity:1;
   visibility:visible;
 }
@@ -80,7 +81,8 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 #slide12:checked~.slides .slide:nth-child(12) img,
 #slide13:checked~.slides .slide:nth-child(13) img,
 #slide14:checked~.slides .slide:nth-child(14) img,
-#slide15:checked~.slides .slide:nth-child(15) img{
+#slide15:checked~.slides .slide:nth-child(15) img,
+#slide16:checked~.slides .slide:nth-child(16) img{
   transform:scale(1.015);
 }
 
@@ -143,6 +145,7 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 #slide13:checked~.controls .prev13,
 #slide14:checked~.controls .prev14,
 #slide15:checked~.controls .prev15,
+#slide16:checked~.controls .prev16,
 #slide1:checked~.controls .next1,
 #slide2:checked~.controls .next2,
 #slide3:checked~.controls .next3,
@@ -157,7 +160,8 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 #slide12:checked~.controls .next12,
 #slide13:checked~.controls .next13,
 #slide14:checked~.controls .next14,
-#slide15:checked~.controls .next15{
+#slide15:checked~.controls .next15,
+#slide16:checked~.controls .next16{
   display:flex;
 }
 
@@ -219,7 +223,8 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 #slide12:checked~.counter .c12,
 #slide13:checked~.counter .c13,
 #slide14:checked~.counter .c14,
-#slide15:checked~.counter .c15{
+#slide15:checked~.counter .c15,
+  #slide16:checked~.counter .c16{
   display:inline;
 }
 
@@ -252,6 +257,7 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 <input type="radio" name="hero-slider" id="slide13">
 <input type="radio" name="hero-slider" id="slide14">
 <input type="radio" name="hero-slider" id="slide15">
+  <input type="radio" name="hero-slider" id="slide16">
 
 <div class="slides">
 
@@ -299,6 +305,9 @@ body{font-family:Arial,sans-serif;overflow-x:hidden}
 </div>
 <div class="slide">
 <img src="8.png" alt="Slide 15">
+</div>
+  <div class="slide">
+<img src="8-1.png" alt="Slide 16">
 </div>
   <div class="slide">
 <img src="1.png" alt="Slide 1">
